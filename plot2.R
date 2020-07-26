@@ -1,0 +1,11 @@
+data<-read.csv("C:/Users/57314/OneDrive - Universidad de los Andes/coursera/datasciencecoursera/Exploratory and data analysis/household_power_consumption.txt",sep = ";")
+Power<-subset(data,Date=="2/2/2007"|Date=="1/2/2007")
+Power$Date_and_time<-paste(Power$Date,Power$Time,sep = " ")
+library(lubridate)
+Power$Date_and_time<-dmy_hms(Power$Date_and_time)
+View(Power)
+Power$Global_active_power<-as.numeric(Power$Global_active_power)
+with(Power, plot(Global_active_power~Date_and_time,type="l",xlab="",
+                 ylab = "Global Active Power (kilowatts)"))
+dev.copy(png,'plot2.png')
+dev.off()
